@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:public_holiday/components/top_app_bar.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Public Holiday"),
-      ),
+      appBar: TopAppBar(title: "Public Holiday.", childWidget: null),
       body: Center(
         child: Text("More to come"),
       ),
