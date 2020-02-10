@@ -9,12 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Public Holiday',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: HomePage(),
     );
   }
 }
-
-
