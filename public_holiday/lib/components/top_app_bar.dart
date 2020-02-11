@@ -63,6 +63,26 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
                 child: Container(
                   height: 50,
                   width: MediaQuery.of(context).size.width * 0.35,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(
+                          Icons.notifications,
+                          color: Colors.black,
+                        ),
+                        onPressed: null,
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.more_vert,
+                          color: Colors.black,
+                        ),
+                        onPressed: null,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
