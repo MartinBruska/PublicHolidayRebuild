@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -8,7 +9,7 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Size preferredSize;
 
   TopAppBar({@required this.title, @required this.childWidget})
-      : preferredSize = Size.fromHeight(56.0);
+      : preferredSize = Size.fromHeight(70.0);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.6,
-                  height: 46,
+                  height: 50,
                   child: Row(
                     children: <Widget>[
                       Padding(
@@ -40,6 +41,9 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
                       ),
                       Text(
                         this.title,
+                        style: GoogleFonts.lobster(
+                        fontSize: 28,
+                        ),
                       ),
                     ],
                   ),
@@ -55,7 +59,7 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ),
                 child: Container(
-                  height: 46,
+                  height: 50,
                   width: MediaQuery.of(context).size.width * 0.35,
                 ),
               ),
