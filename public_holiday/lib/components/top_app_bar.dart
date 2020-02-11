@@ -37,12 +37,14 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: Icon(Icons.calendar_today),
+                        child: Image(
+                          image: AssetImage("assets/icons/calendar_icon.png"),
+                        ),
                       ),
                       Text(
                         this.title,
                         style: GoogleFonts.lobster(
-                        fontSize: 28,
+                          fontSize: 23,
                         ),
                       ),
                     ],
