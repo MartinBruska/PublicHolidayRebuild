@@ -31,20 +31,31 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ),
                 child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        const Color(0xFFFFDA44),
+                        const Color(0xFFFFFFFF)
+                      ],
+                      tileMode: TileMode.repeated,
+                    ),
+                  ),
                   width: MediaQuery.of(context).size.width * 0.6,
                   height: 50,
                   child: Row(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Image(
+                        padding: const EdgeInsets.all(4.0),
+                        child: const Image(
                           image: AssetImage("assets/icons/calendar_icon.png"),
                         ),
                       ),
                       Text(
                         this.title,
                         style: GoogleFonts.lobster(
-                          fontSize: 23,
+                          fontSize: 26,
                         ),
                       ),
                     ],
@@ -62,24 +73,24 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 child: Container(
                   height: 50,
-                  width: MediaQuery.of(context).size.width * 0.35,
+                  width: MediaQuery.of(context).size.width * 0.30,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
-                      IconButton(
-                        icon: Icon(
+                      GestureDetector(
+                        onTap: () {},
+                        child: const Icon(
                           Icons.notifications,
-                          color: Colors.black,
+                          size: 30,
                         ),
-                        onPressed: null,
                       ),
-                      IconButton(
-                        icon: Icon(
+                      GestureDetector(
+                        onTap: () {},
+                        child: const Icon(
                           Icons.more_vert,
-                          color: Colors.black,
+                          size: 30,
                         ),
-                        onPressed: null,
                       ),
                     ],
                   ),
