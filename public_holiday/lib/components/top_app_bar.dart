@@ -21,45 +21,44 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Card(
-                color: Colors.yellow,
-                elevation: 10,
-                shape: RoundedRectangleBorder(
+              Container(
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFFDA44),
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(30),
                     bottomLeft: Radius.circular(10),
                   ),
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        const Color(0xFFFFDA44),
-                        const Color(0xFFFFFFFF)
-                      ],
-                      tileMode: TileMode.repeated,
+                  gradient: LinearGradient(
+                    begin: Alignment(0, 0.5),
+                    end: Alignment.topCenter,
+                    colors: [const Color(0xFFFFDA44), const Color(0xFFFFFFFF)],
+                    tileMode: TileMode.clamp,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.25),
+                      offset: Offset(1, 6),
+                      blurRadius: 8.0,
                     ),
-                  ),
-                  width: MediaQuery.of(context).size.width * 0.6,
-                  height: 50,
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: const Image(
-                          image: AssetImage("assets/icons/calendar_icon.png"),
-                        ),
+                  ],
+                ),
+                width: MediaQuery.of(context).size.width * 0.6,
+                height: 50,
+                child: Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: const Image(
+                        image: AssetImage("assets/icons/calendar_icon.png"),
                       ),
-                      Text(
-                        this.title,
-                        style: GoogleFonts.lobster(
-                          fontSize: 26,
-                        ),
+                    ),
+                    Text(
+                      this.title,
+                      style: GoogleFonts.lobster(
+                        fontSize: 26,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
               Card(
