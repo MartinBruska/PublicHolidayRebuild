@@ -3,12 +3,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  final Widget childWidget;
 
   @override
   final Size preferredSize;
 
-  TopAppBar({@required this.title, @required this.childWidget})
+  TopAppBar({@required this.title})
       : preferredSize = Size.fromHeight(70.0);
 
   @override
@@ -42,7 +41,7 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ],
                 ),
-                width: MediaQuery.of(context).size.width * 0.6,
+                width: const  MediaQuery.of(context).size.width * 0.6,
                 height: 50,
                 margin: const EdgeInsets.all(8.0),
                 child: Row(
@@ -84,7 +83,7 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ],
                 ),
                 height: 50,
-                width: MediaQuery.of(context).size.width * 0.30,
+                width:const MediaQuery.of(context).size.width * 0.30,
                 margin: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,

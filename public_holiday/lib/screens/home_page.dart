@@ -5,7 +5,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TopAppBar(title: "Public Holiday.", childWidget: null),
+      appBar: TopAppBar(title: "Public Holiday."),
       body: Center(
         child: Text("More to come"),
       ),
