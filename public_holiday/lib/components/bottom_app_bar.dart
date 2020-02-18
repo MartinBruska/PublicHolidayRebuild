@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomBottomAppBar extends StatelessWidget {
   final List<Icon> icons;
@@ -39,8 +40,26 @@ class CustomBottomAppBar extends StatelessWidget {
         children: <Widget>[
           GestureDetector(
             onTap: () {},
-            child: const Image(
-              image: AssetImage("assets/icons/countries_icon.png"),
+            child: Container(
+              width: 50,
+              height: 50,
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Expanded(
+                    child: Image(
+                      image: AssetImage("assets/icons/countries_icon.png"),
+                    ),
+                  ),
+                  Text(
+                    "Countries",
+                    style: GoogleFonts.lobster(
+                      fontSize: 14,
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
           GestureDetector(
