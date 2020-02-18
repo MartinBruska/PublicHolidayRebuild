@@ -34,6 +34,35 @@ class CustomBottomAppBar extends StatelessWidget {
           ),
         ],
       ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          GestureDetector(
+            onTap: () {},
+            child: const Image(
+              image: AssetImage("assets/icons/countries_icon.png"),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {},
+            child: const Image(
+              image: AssetImage("assets/icons/favs_icon.png"),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {},
+            child: const Image(
+              image: AssetImage("assets/icons/recent_icon.png"),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {},
+            child: const Image(
+              image: AssetImage("assets/icons/countries_search_icon.png"),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
