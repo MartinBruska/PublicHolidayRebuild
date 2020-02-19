@@ -36,51 +36,65 @@ class CustomBottomAppBar extends StatelessWidget {
         ],
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              width: 50,
-              height: 50,
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Expanded(
-                    child: Image(
-                      image: AssetImage("assets/icons/countries_icon.png"),
-                    ),
-                  ),
-                  Text(
-                    "Countries",
-                    style: GoogleFonts.lobster(
-                      fontSize: 14,
-                    ),
-                  )
-                ],
-              ),
-            ),
+          BottomAppBarButton(
+            iconName: "countries_icon.png",
+            title: "Countries",
+            onTapFunction: null,
           ),
-          GestureDetector(
-            onTap: () {},
-            child: const Image(
-              image: AssetImage("assets/icons/favs_icon.png"),
-            ),
+          BottomAppBarButton(
+            iconName:"favs_icon.png",
+            title: "Favs",
+            onTapFunction: null,
           ),
-          GestureDetector(
-            onTap: () {},
-            child: const Image(
-              image: AssetImage("assets/icons/recent_icon.png"),
-            ),
+          BottomAppBarButton(
+            iconName:"recent_icon.png",
+            title: "Recent",
+            onTapFunction: null,
           ),
-          GestureDetector(
-            onTap: () {},
-            child: const Image(
-              image: AssetImage("assets/icons/countries_search_icon.png"),
-            ),
+          BottomAppBarButton(
+            iconName: "countries_search_icon.png",
+            title: "Search",
+            onTapFunction: null,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class BottomAppBarButton extends StatelessWidget {
+  final String iconName;
+  final String title;
+  final Function onTapFunction;
+
+  BottomAppBarButton(
+      {@required this.iconName,
+      @required this.title,
+      @required this.onTapFunction});
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: this.onTapFunction,
+      child: Container(
+        width: 50,
+        height: 55,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Expanded(
+              child: Image(image: AssetImage("assets/icons/${this.iconName}")),
+            ),
+            Text(
+              this.title,
+              style: GoogleFonts.lobster(
+                fontSize: 14,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
