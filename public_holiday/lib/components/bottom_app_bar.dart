@@ -2,50 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomBottomAppBar extends StatelessWidget {
-  final List<Icon> icons;
+  final List<String> iconsName;
   final List<String> iconsTitle;
+  final Function(int) onPressed;
+  final int activeIndex;
 
-  CustomBottomAppBar({@required this.icons, @required this.iconsTitle});
+  CustomBottomAppBar(
+      {@required this.iconsName,
+      @required this.iconsTitle,
+      @required this.onPressed,
+      @required this.activeIndex});
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          BottomAppBarButton(
-            iconName: "countries_icon.png",
-            title: "Countries",
-            onTapFunction: () {
-              print(" countries tapped");
-            },
-          ),
-          BottomAppBarButton(
-            iconName: "favs_icon.png",
-            title: "Favs",
-            onTapFunction: () {
-              print(" favs tapped");
-            },
-          ),
-          BottomAppBarButton(
-            iconName: "recent_icon.png",
-            title: "Recent",
-            onTapFunction: () {
-              print(" recent tapped");
-            },
-          ),
-          BottomAppBarButton(
-            iconName: "countries_search_icon.png",
-            title: "Search",
-            onTapFunction: () {
-              print(" search tapped");
-            },
-          ),
-        ],
-      ),
       height: 66.0,
       width: MediaQuery.of(context).size.width,
       margin: EdgeInsets.all(8.0),
       decoration: BoxDecoration(
+        color: const Color(0xFFFFDA44),
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(20),
           topLeft: Radius.circular(20),
@@ -67,6 +42,17 @@ class CustomBottomAppBar extends StatelessWidget {
           ),
         ],
       ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          for (int i = 0; i < iconsName.length; i++)
+            BottomAppBarButton(
+                iconName: iconsName[i],
+                title: iconsTitle[i],
+                color: i == activeIndex? const Color(0xFFFFDA44): Colors.transparent,
+                onTapFunction: () => onPressed(i))
+        ],
+      ),
     );
   }
 }
@@ -75,32 +61,28 @@ class BottomAppBarButton extends StatefulWidget {
   final String iconName;
   final String title;
   final VoidCallback onTapFunction;
+  final Color color;
 
   BottomAppBarButton(
       {@required this.iconName,
       @required this.title,
-      @required this.onTapFunction});
+      @required this.onTapFunction,
+      @required this.color});
 
   @override
   _BottomAppBarButtonState createState() => _BottomAppBarButtonState();
 }
 
 class _BottomAppBarButtonState extends State<BottomAppBarButton> {
-  bool _pressed = false;
+ 
   @override
   Widget build(BuildContext context) {
     return Material(
-      //type: MaterialType.transparency,
-      color: _pressed ? Color(0xFFFFDA44) : Colors.transparent,
+      //type: MaterialType.transparency,  
+      color: this.widget.color,
       child: InkWell(
         borderRadius: BorderRadius.circular(10.0),
-        onTap: () {
-          widget.onTapFunction();
-          this.setState(() {
-            _pressed = true;
-          });
-        },
-        //highlightColor: Colors.green,
+        onTap: this.widget.onTapFunction,       
         child: Container(
           padding: EdgeInsets.all(4.0),
           width: 70,
