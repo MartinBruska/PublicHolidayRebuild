@@ -49,7 +49,7 @@ class CustomBottomAppBar extends StatelessWidget {
             BottomAppBarButton(
                 iconName: iconsName[i],
                 title: iconsTitle[i],
-                color: i == activeIndex? const Color(0xFFFFDA44): Colors.transparent,
+                fontSize: i == activeIndex ? 19: 14,
                 onTapFunction: () => onPressed(i))
         ],
       ),
@@ -61,48 +61,42 @@ class BottomAppBarButton extends StatefulWidget {
   final String iconName;
   final String title;
   final VoidCallback onTapFunction;
-  final Color color;
+  final double fontSize;
 
   BottomAppBarButton(
       {@required this.iconName,
       @required this.title,
       @required this.onTapFunction,
-      @required this.color});
+      @required this.fontSize});
 
   @override
   _BottomAppBarButtonState createState() => _BottomAppBarButtonState();
 }
 
 class _BottomAppBarButtonState extends State<BottomAppBarButton> {
- 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      //type: MaterialType.transparency,  
-      color: this.widget.color,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(10.0),
-        onTap: this.widget.onTapFunction,       
-        child: Container(
-          padding: EdgeInsets.all(4.0),
-          width: 70,
-          height: 66,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Expanded(
-                child: Image(
-                    image: AssetImage("assets/icons/${this.widget.iconName}")),
+    return GestureDetector(
+      onTap: this.widget.onTapFunction,
+      child: Container(
+        width: 70,
+        height: 55,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Expanded(
+              child: Image.asset(
+                "assets/icons/${this.widget.iconName}",
               ),
-              Text(
-                this.widget.title,
-                style: GoogleFonts.lobster(
-                  fontSize: 14,
-                ),
-              )
-            ],
-          ),
+            ),
+            Text(
+              this.widget.title,
+              style: GoogleFonts.lobster(
+                fontSize: this.widget.fontSize,
+              ),
+            )
+          ],
         ),
       ),
     );
