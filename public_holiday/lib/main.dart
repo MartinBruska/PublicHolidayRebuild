@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:public_holiday/screens/home_page.dart';
+import './screens/home_page.dart';
 
 void main() => runApp(MyApp());
 
