@@ -49,6 +49,7 @@ flutter:
     - assets/icons/favs_icon.png
     - assets/icons/recent_icon.png
     - assets/icons/countries_search_icon.png
+    - assets/images/turkey-flag.jpg
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 
