@@ -15,7 +15,8 @@ class _HomePageState extends State<HomePage> {
 
   final pages = List<Widget>.unmodifiable([
     CountriesPage(),
-    FavsPage(),
+    MyHomePage(),
+    //FavsPage(),
     RecentPage(),
   ]);
 
