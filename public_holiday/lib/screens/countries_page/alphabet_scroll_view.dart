@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -34,8 +36,8 @@ class AlphabetScrollView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width * 0.06,
-      margin: EdgeInsets.only(right: 8.0),
+      width: MediaQuery.of(context).size.width * 0.08,
+      margin: EdgeInsets.only(right: 4.0),
       decoration: BoxDecoration(
         color: const Color(0xFFFFDA44),
         borderRadius: BorderRadius.all(
@@ -59,18 +61,29 @@ class AlphabetScrollView extends StatelessWidget {
         ],
       ),
       child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          //crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: this
               .alphabet
-              .map((letter) => FlatButton(
-                  padding: EdgeInsets.only(right: 2.0, left: 2.0),
-                  onPressed: null,
-                  child: Text(
-                    letter.toUpperCase(),
-                    style: GoogleFonts.patuaOne(
-                      fontSize: 15,
+              .map(
+                (letter) => GestureDetector(
+                  onTap: () {
+                    log("button pushed" + letter);
+                  },
+                  child: Container(
+                    width: 48,
+                    height: 35,
+                    child: Center(
+                      child: Text(
+                        letter.toUpperCase(),
+                        style: GoogleFonts.patuaOne(
+                          fontSize: 22,
+                        ),
+                      ),
                     ),
-                  )))
+                  ),
+                ),
+              )
               .toList()),
     );
   }

@@ -18,7 +18,8 @@ class CustomBottomAppBar extends StatelessWidget {
     return Container(
       height: 66.0,
       width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.all(8.0),
+      margin: EdgeInsets.only(top: 8.0),
+      //margin: EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         color: const Color(0xFFFFDA44),
         borderRadius: BorderRadius.only(

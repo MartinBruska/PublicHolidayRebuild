@@ -14,7 +14,7 @@ class CountryListTile extends StatelessWidget {
       height: 80,
       width: MediaQuery.of(context).size.width * 0.9,
       margin: EdgeInsets.only(
-        left: 4.0,
+        left: 2.0,
       ),
       child: Card(
         elevation: 8,
