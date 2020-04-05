@@ -1,0 +1,1 @@
+var DUMMY_COUNTRIES = [];
