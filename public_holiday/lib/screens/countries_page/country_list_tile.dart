@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CountryListTile extends StatelessWidget {
-  final AssetImage countryFlagImage;
+  final String flagImageName;
   final String countryName;
 
-  CountryListTile(
-      {@required this.countryFlagImage, @required this.countryName});
+  CountryListTile({@required this.flagImageName, @required this.countryName});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,9 @@ class CountryListTile extends StatelessWidget {
         child: Center(
           child: ListTile(
             leading: CircleAvatar(
-              backgroundImage: this.countryFlagImage,
+              backgroundImage: AssetImage(
+                "assets/images/${this.flagImageName}.jpg",
+              ),
               radius: 27,
             ),
             title: Text(

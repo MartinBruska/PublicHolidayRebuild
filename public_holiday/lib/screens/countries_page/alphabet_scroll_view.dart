@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AlphabetScrollView extends StatelessWidget {
+  final void Function(String letter, bool active) parentAction;
+  AlphabetScrollView({this.parentAction});
   final List<String> alphabet = [
     'a',
     'b',
@@ -32,6 +34,7 @@ class AlphabetScrollView extends StatelessWidget {
     'y',
     'z'
   ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -60,31 +63,27 @@ class AlphabetScrollView extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
-          //crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: this
-              .alphabet
-              .map(
-                (letter) => GestureDetector(
-                  onTap: () {
-                    log("button pushed" + letter);
-                  },
-                  child: Container(
-                    width: 48,
-                    height: 35,
-                    child: Center(
-                      child: Text(
-                        letter.toUpperCase(),
-                        style: GoogleFonts.patuaOne(
-                          fontSize: 22,
-                        ),
-                      ),
-                    ),
+      child: ListView.builder(
+        itemCount: alphabet.length,
+        itemBuilder: (BuildContext context, int index) {
+          return GestureDetector(
+            onTap: () {
+              this.parentAction(alphabet[index], true);
+            },
+            child: Container(
+              height: 35,
+              child: Center(
+                child: Text(
+                  alphabet[index].toUpperCase(),
+                  style: GoogleFonts.patuaOne(
+                    fontSize: 22,
                   ),
                 ),
-              )
-              .toList()),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }
