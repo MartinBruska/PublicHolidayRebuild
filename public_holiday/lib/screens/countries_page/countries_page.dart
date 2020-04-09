@@ -3,6 +3,7 @@ import 'package:public_holiday/models/country.dart';
 import 'package:public_holiday/models/dummy_countries.dart';
 import 'dart:async';
 import 'package:faker/faker.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import 'package:public_holiday/screens/countries_page/alphabet_scroll_view.dart';
 import 'package:public_holiday/screens/countries_page/country_list_tile.dart';
@@ -16,6 +17,7 @@ class _CountriesPageState extends State<CountriesPage> {
   Timer _debounce;
   bool _visible = false;
   String chosenLetter = "";
+  final ItemScrollController itemScrollController = ItemScrollController();
 
 //To Load dummy data
   @override
@@ -27,10 +29,13 @@ class _CountriesPageState extends State<CountriesPage> {
           flagImageName: "turkey-flag"));
       DUMMY_COUNTRIES
           .sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
-          
     }
     super.initState();
-    print("Data initialized");
+  }
+
+  int _getFirstLetterMatchIndex(String letter) {
+    return DUMMY_COUNTRIES
+        .indexWhere((country) => country.name.startsWith(letter));
   }
 
   _showChosenLetter(String letter, bool active) {
@@ -44,6 +49,15 @@ class _CountriesPageState extends State<CountriesPage> {
       _visible = true;
       chosenLetter = letter.toUpperCase();
     });
+
+    int matchIndex = _getFirstLetterMatchIndex(letter.toUpperCase());
+    print(matchIndex);
+    if (matchIndex >= 0)
+      itemScrollController.scrollTo(
+        index: matchIndex,
+        duration: Duration(milliseconds: 700),
+        curve: Curves.easeInOutCubic,
+      );
   }
 
   @override
@@ -55,8 +69,9 @@ class _CountriesPageState extends State<CountriesPage> {
           children: <Widget>[
             Container(
               width: MediaQuery.of(context).size.width * 0.9,
-              child: ListView.builder(
+              child: ScrollablePositionedList.builder(
                   itemCount: DUMMY_COUNTRIES.length,
+                  itemScrollController: itemScrollController,
                   itemBuilder: (BuildContext context, int index) {
                     return CountryListTile(
                       flagImageName: DUMMY_COUNTRIES[index].flagImageName,
