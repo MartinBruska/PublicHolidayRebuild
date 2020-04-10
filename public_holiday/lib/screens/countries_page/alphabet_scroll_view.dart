@@ -32,7 +32,7 @@ class AlphabetScrollView extends StatelessWidget {
     'w',
     'x',
     'y',
-    'z'
+    'z',
   ];
 
   @override

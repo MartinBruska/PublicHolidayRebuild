@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:public_holiday/models/country.dart';
 
 class CountryListTile extends StatelessWidget {
   final String flagImageName;
   final String countryName;
+  final String countryId;
+  final Function toggleFavourite;
+  final Function isFavourite;
 
-  CountryListTile({@required this.flagImageName, @required this.countryName});
+  CountryListTile(
+      {@required this.flagImageName,
+      @required this.countryName,
+      @required this.countryId,
+      @required this.toggleFavourite,
+      @required this.isFavourite});
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +42,13 @@ class CountryListTile extends StatelessWidget {
               this.countryName,
               style: GoogleFonts.patuaOne(fontSize: 25),
             ),
-            trailing: Icon(
-              Icons.favorite,
-              size: 30,
-              color: Colors.red,
+            trailing: IconButton(
+              icon: Icon(
+                isFavourite(countryId) ? Icons.favorite : Icons.favorite_border,
+                size: 30,
+                color: Colors.red,
+              ),
+              onPressed: () => toggleFavourite(countryId),
             ),
           ),
         ),

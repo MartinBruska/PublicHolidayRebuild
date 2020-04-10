@@ -4,7 +4,6 @@ import 'package:public_holiday/models/dummy_countries.dart';
 import 'dart:async';
 import 'package:faker/faker.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-
 import 'package:public_holiday/screens/countries_page/alphabet_scroll_view.dart';
 import 'package:public_holiday/screens/countries_page/country_list_tile.dart';
 
@@ -18,7 +17,8 @@ class _CountriesPageState extends State<CountriesPage> {
   bool _visible = false;
   String chosenLetter = "";
   final ItemScrollController itemScrollController = ItemScrollController();
-
+  final List<Country> favouriteList = [];
+  
 //To Load dummy data
   @override
   void initState() {
@@ -30,7 +30,7 @@ class _CountriesPageState extends State<CountriesPage> {
       DUMMY_COUNTRIES
           .sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
     }
-    super.initState();
+      super.initState();
   }
 
   int _getFirstLetterMatchIndex(String letter) {
@@ -51,13 +51,32 @@ class _CountriesPageState extends State<CountriesPage> {
     });
 
     int matchIndex = _getFirstLetterMatchIndex(letter.toUpperCase());
-    print(matchIndex);
     if (matchIndex >= 0)
       itemScrollController.scrollTo(
         index: matchIndex,
         duration: Duration(milliseconds: 700),
         curve: Curves.easeInOutCubic,
       );
+  }
+
+  _toggleFavourite(String countryID) {
+    int existingIndex =
+        favouriteList.indexWhere((country) => country.id == countryID);
+    if (existingIndex >= 0) {
+      setState(() {
+        favouriteList.removeAt(existingIndex);
+        
+      });
+    } else {
+      setState(() {
+        favouriteList.add(
+            DUMMY_COUNTRIES.firstWhere((country) => country.id == countryID));
+      });
+    }
+  }
+
+  bool _isFavourite(String countryID) {
+    return favouriteList.any((country) => countryID == country.id);
   }
 
   @override
@@ -76,6 +95,9 @@ class _CountriesPageState extends State<CountriesPage> {
                     return CountryListTile(
                       flagImageName: DUMMY_COUNTRIES[index].flagImageName,
                       countryName: DUMMY_COUNTRIES[index].name,
+                      countryId: DUMMY_COUNTRIES[index].id,
+                      toggleFavourite: _toggleFavourite,
+                      isFavourite: _isFavourite,
                     );
                   }),
             ),
