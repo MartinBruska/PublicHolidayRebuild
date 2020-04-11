@@ -40,10 +40,10 @@ class AlphabetScrollView extends StatelessWidget {
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width * 0.08,
-      margin: EdgeInsets.only(right: 4.0),
+      margin: EdgeInsets.only(top: 4.0, bottom: 4.0, right: 4.0),
       decoration: BoxDecoration(
         color: const Color(0xFFFFDA44),
-        borderRadius: BorderRadius.all(
+        borderRadius: BorderRadius.all(  
           Radius.circular(20.0),
         ),
         gradient: LinearGradient(

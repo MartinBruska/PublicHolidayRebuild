@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:public_holiday/models/country.dart';
-import 'package:public_holiday/models/dummy_countries.dart';
 import 'dart:async';
-import 'package:faker/faker.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+
+import 'package:flutter/material.dart';
+import 'package:public_holiday/models/countries.dart';
+import 'package:public_holiday/models/country.dart';
 import 'package:public_holiday/screens/countries_page/alphabet_scroll_view.dart';
 import 'package:public_holiday/screens/countries_page/country_list_tile.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class CountriesPage extends StatefulWidget {
   @override
@@ -18,23 +18,17 @@ class _CountriesPageState extends State<CountriesPage> {
   String chosenLetter = "";
   final ItemScrollController itemScrollController = ItemScrollController();
   final List<Country> favouriteList = [];
+  List<Country> countriesList;
   
 //To Load dummy data
   @override
   void initState() {
-    for (var i = 0; i < 100; i++) {
-      DUMMY_COUNTRIES.add(Country(
-          id: i.toString(),
-          name: faker.person.firstName(),
-          flagImageName: "turkey-flag"));
-      DUMMY_COUNTRIES
-          .sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
-    }
-      super.initState();
+     countriesList = Countries().generateDummyData(100);
+     super.initState();
   }
 
-  int _getFirstLetterMatchIndex(String letter) {
-    return DUMMY_COUNTRIES
+    int _getFirstLetterMatchIndex(String letter) {
+    return countriesList
         .indexWhere((country) => country.name.startsWith(letter));
   }
 
@@ -70,7 +64,7 @@ class _CountriesPageState extends State<CountriesPage> {
     } else {
       setState(() {
         favouriteList.add(
-            DUMMY_COUNTRIES.firstWhere((country) => country.id == countryID));
+            countriesList.firstWhere((country) => country.id == countryID));
       });
     }
   }
@@ -86,16 +80,16 @@ class _CountriesPageState extends State<CountriesPage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Container(
-              width: MediaQuery.of(context).size.width * 0.9,
+            Expanded(
+              //width: MediaQuery.of(context).size.width * 0.9,
               child: ScrollablePositionedList.builder(
-                  itemCount: DUMMY_COUNTRIES.length,
+                  itemCount: countriesList.length,
                   itemScrollController: itemScrollController,
                   itemBuilder: (BuildContext context, int index) {
                     return CountryListTile(
-                      flagImageName: DUMMY_COUNTRIES[index].flagImageName,
-                      countryName: DUMMY_COUNTRIES[index].name,
-                      countryId: DUMMY_COUNTRIES[index].id,
+                      flagImageName: countriesList[index].flagImageName,
+                      countryName: countriesList[index].name,
+                      countryId: countriesList[index].id,
                       toggleFavourite: _toggleFavourite,
                       isFavourite: _isFavourite,
                     );

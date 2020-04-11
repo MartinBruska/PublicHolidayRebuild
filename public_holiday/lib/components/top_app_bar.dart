@@ -39,7 +39,6 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             width: MediaQuery.of(context).size.width * 0.65,
             height: 50,
-            margin: const EdgeInsets.only(bottom: 8.0),
             child: Row(
               children: <Widget>[
                 Padding(
@@ -80,7 +79,7 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             height: 50,
             width: MediaQuery.of(context).size.width * 0.30,
-            margin: const EdgeInsets.only(bottom: 8.0),
+            //margin: const EdgeInsets.only(bottom: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               mainAxisSize: MainAxisSize.max,

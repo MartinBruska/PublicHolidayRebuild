@@ -4,7 +4,16 @@ class Country {
   final String id;
   final String name;
   final String flagImageName;
-   //ToDo list of holidays
+  bool isFavourite;
+  //ToDo list of holidays
 
-  const Country({this.id, this.name, this.flagImageName});
+  Country({
+    @required this.id,
+    @required this.name,
+    @required this.flagImageName,
+    this.isFavourite = false,
+  });
+
+
+  
 }
