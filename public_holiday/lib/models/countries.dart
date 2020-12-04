@@ -1,27 +1,38 @@
 import 'package:faker/faker.dart';
+import 'package:flutter/foundation.dart';
 
 import 'country.dart';
 
-class Countries {
-  List<Country> countriesList = [];
+class Countries with ChangeNotifier {
+  List<Country> _countriesList = [];
 
-  List<Country> generateDummyData(int numberOfCountries) {
+  Countries() {
+    print("new countries build");
+    _generateDummyData(100);
+  }
+
+  void _generateDummyData(int numberOfCountries) {
     for (var i = 0; i < numberOfCountries; i++) {
-      this.countriesList.add(Country(
+      this._countriesList.add(Country(
           id: i.toString(),
           name: faker.person.firstName(),
           flagImageName: "turkey-flag"));
       this
-          .countriesList
+          ._countriesList
           .sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
     }
-    return [...countriesList];
   }
 
-  List<Country> get getCountriesLsit{
-    return [...countriesList];
+  List<Country> get getCountriesList {
+    return [..._countriesList];
   }
 
- 
+  List<Country> get getfavourites {
+    return _countriesList.where((country) => country.isFavourite).toList();
+  }
 
+  int getFirstLetterMatchIndex(String letter) {
+    return _countriesList
+        .indexWhere((country) => country.name.startsWith(letter.toUpperCase()));
+  }
 }

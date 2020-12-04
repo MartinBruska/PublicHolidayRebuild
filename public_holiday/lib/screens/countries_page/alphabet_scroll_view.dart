@@ -1,10 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:public_holiday/models/countries.dart';
 
 class AlphabetScrollView extends StatelessWidget {
-  final void Function(String letter, bool active) parentAction;
+  final void Function(String letter, bool active, int matchIndex) parentAction;
   AlphabetScrollView({this.parentAction});
   final List<String> alphabet = [
     'a',
@@ -37,13 +37,14 @@ class AlphabetScrollView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final countriesList = Provider.of<Countries>(context);
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width * 0.08,
       margin: EdgeInsets.only(top: 4.0, bottom: 4.0, right: 4.0),
       decoration: BoxDecoration(
         color: const Color(0xFFFFDA44),
-        borderRadius: BorderRadius.all(  
+        borderRadius: BorderRadius.all(
           Radius.circular(20.0),
         ),
         gradient: LinearGradient(
@@ -68,7 +69,8 @@ class AlphabetScrollView extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () {
-              this.parentAction(alphabet[index], true);
+              this.parentAction(alphabet[index], true,
+                  countriesList.getFirstLetterMatchIndex(alphabet[index]));
             },
             child: Container(
               height: 35,
