@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Country with ChangeNotifier {
+class Country {
   final String id;
   final String name;
   final String flagImageName;
@@ -13,9 +13,4 @@ class Country with ChangeNotifier {
     @required this.flagImageName,
     this.isFavourite = false,
   });
-
-  void toggleFavouriteStatus(){
-    this.isFavourite = !this.isFavourite;
-    notifyListeners();
-  }
 }

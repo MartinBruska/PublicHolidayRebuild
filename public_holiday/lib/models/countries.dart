@@ -17,8 +17,7 @@ class Countries with ChangeNotifier {
           id: i.toString(),
           name: faker.person.firstName(),
           flagImageName: "turkey-flag"));
-      this
-          ._countriesList
+      this._countriesList
           .sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
     }
   }
@@ -27,12 +26,17 @@ class Countries with ChangeNotifier {
     return [..._countriesList];
   }
 
-  List<Country> get getfavourites {
-    return _countriesList.where((country) => country.isFavourite).toList();
+  List<Country> get getFavourites {
+    return [..._countriesList].where((country) => country.isFavourite).toList();
   }
 
   int getFirstLetterMatchIndex(String letter) {
-    return _countriesList
-        .indexWhere((country) => country.name.startsWith(letter.toUpperCase()));
+    return [..._countriesList].indexWhere((country) => country.name.startsWith(letter.toUpperCase()));
+  }
+
+  void toggleFavouriteStatus(Country country) {
+    int index = this._countriesList.indexWhere((element) => element.name == country.name);
+    this._countriesList[index].isFavourite = !this._countriesList[index].isFavourite;
+    notifyListeners();
   }
 }

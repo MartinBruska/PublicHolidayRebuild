@@ -3,12 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:public_holiday/components/bottom_app_bar.dart';
 import 'package:public_holiday/components/top_app_bar.dart';
 import 'package:public_holiday/models/countries.dart';
-import 'package:public_holiday/models/country.dart';
+import 'package:public_holiday/models/recentCountries.dart';
 import 'package:public_holiday/screens/countries_page/countries_page.dart';
 import 'package:public_holiday/screens/favs_page.dart';
 import 'package:public_holiday/screens/recent_page.dart';
-
-
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,8 +15,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var navIndex = 0;
-  static List<Country> favouriteList = [];
-  
+
+  final _titles = List<
+      String>.unmodifiable(["Public Holiday.", "Favourites", "Recent", "Search)"
+  ]);
+
   final pages = List<Widget>.unmodifiable([
     CountriesPage(),
     FavsPage(),
@@ -27,10 +28,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-          create: (context) => Countries(),
-          child: Scaffold(
-        appBar: TopAppBar(title: "Public Holiday."),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => Countries()),
+        ChangeNotifierProvider(create: (context) => RecentCountries()),
+      ],
+      child: Scaffold(
+        appBar: TopAppBar(title: _titles[navIndex]),
         body: pages[navIndex],
         bottomNavigationBar: CustomBottomAppBar(
           iconsName: [
@@ -39,12 +43,7 @@ class _HomePageState extends State<HomePage> {
             "recent_icon.png",
             "countries_search_icon.png"
           ],
-          iconsTitle: [
-            "Countries",
-            "Favs",
-            "Recent",
-            "Search"
-          ],
+          iconsTitle: ["Countries", "Favs", "Recent", "Search"],
           onPressed: (i) => setState(() => navIndex = i),
           activeIndex: navIndex,
         ),

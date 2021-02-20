@@ -39,7 +39,7 @@ class _CountriesPageState extends State<CountriesPage> {
 
   @override
   Widget build(BuildContext context) {
-    final countriesList = Provider.of<Countries>(context).getCountriesList;
+    final _countriesList = Provider.of<Countries>(context, listen: false).getCountriesList;
     return Stack(
       children: <Widget>[
         Row(
@@ -48,15 +48,11 @@ class _CountriesPageState extends State<CountriesPage> {
             Expanded(
               //width: MediaQuery.of(context).size.width * 0.9,
               child: ScrollablePositionedList.builder(
-                itemCount: countriesList.length,
+                itemCount: _countriesList.length,
                 itemScrollController: itemScrollController,
-                itemBuilder: (BuildContext context, int index) =>
-                    ChangeNotifierProvider.value(
-                  value: countriesList[index],
-                  child: CountryListTile(),
+                itemBuilder: (_, index) => CountryListTile(_countriesList[index]),
                 ),
               ),
-            ),
             AlphabetScrollView(parentAction: _showChosenLetter),
           ],
         ),

@@ -15,42 +15,45 @@ class CustomBottomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 66.0,
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        color: const Color(0xFFFFDA44),
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(20),
-          topLeft: Radius.circular(20),
-        ),
-        gradient: LinearGradient(
-          begin: Alignment(0, 1),
-          end: Alignment.topCenter,
-          colors: [
-            const Color(0xFFFFFFFF),
-            const Color(0xFFFFDA44),
-          ],
-          tileMode: TileMode.clamp,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.25),
-            offset: Offset(1, 6),
-            blurRadius: 8.0,
+    return SafeArea(
+      child: Container(
+        height: 66.0,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          color: const Color(0xFFFFDA44),
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(20),
+            topLeft: Radius.circular(20),
           ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          for (int i = 0; i < iconsName.length; i++)
-            BottomAppBarButton(
+          gradient: LinearGradient(
+            begin: Alignment(0, 1),
+            end: Alignment.topCenter,
+            colors: [
+              const Color(0xFFFFFFFF),
+              const Color(0xFFFFDA44),
+            ],
+            tileMode: TileMode.clamp,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.25),
+              offset: Offset(1, 6),
+              blurRadius: 8.0,
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            for (int i = 0; i < iconsName.length; i++)
+              BottomAppBarButton(
                 iconName: iconsName[i],
                 title: iconsTitle[i],
-                fontSize: i == activeIndex ? 19: 14,
-                onTapFunction: () => onPressed(i))
-        ],
+                fontSize: i == activeIndex ? 19 : 14,
+                onTapFunction: () => onPressed(i),
+              ),
+          ],
+        ),
       ),
     );
   }
