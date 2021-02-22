@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:public_holiday/models/recentCountries.dart';
+
+import 'countries_page/country_list_tile.dart';
 
 class RecentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text("Recent Page"),
-      ),
-    );
+    final _recentCountries =
+        context.watch<RecentCountries>().getRecentCountries;
+
+    return _recentCountries.isNotEmpty
+        ? ListView.builder(
+            itemCount: _recentCountries.length,
+            itemBuilder: (_, index) => CountryListTile(_recentCountries[index]),
+          )
+        : Center(
+            child: Text("No recent country added yet"),
+          );
   }
 }
