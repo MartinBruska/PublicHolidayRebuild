@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:public_holiday/models/recentCountries.dart';
+import 'package:public_holiday/models/recent_countries.dart';
 
-import 'countries_page/country_list_tile.dart';
+import '../components/country_list_tile.dart';
 
 class RecentPage extends StatelessWidget {
   @override

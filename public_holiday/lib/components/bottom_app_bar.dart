@@ -2,16 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomBottomAppBar extends StatelessWidget {
-  final List<String> iconsName;
-  final List<String> iconsTitle;
-  final Function(int) onPressed;
-  final int activeIndex;
+  final List<BottomAppBarButton> bottomAppBarButtons;
 
-  CustomBottomAppBar(
-      {@required this.iconsName,
-      @required this.iconsTitle,
-      @required this.onPressed,
-      @required this.activeIndex});
+  CustomBottomAppBar(this.bottomAppBarButtons);
 
   @override
   Widget build(BuildContext context) {
@@ -44,42 +37,29 @@ class CustomBottomAppBar extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            for (int i = 0; i < iconsName.length; i++)
-              BottomAppBarButton(
-                iconName: iconsName[i],
-                title: iconsTitle[i],
-                fontSize: i == activeIndex ? 19 : 14,
-                onTapFunction: () => onPressed(i),
-              ),
-          ],
+          children: <Widget>[...bottomAppBarButtons],
         ),
       ),
     );
   }
 }
 
-class BottomAppBarButton extends StatefulWidget {
+class BottomAppBarButton extends StatelessWidget {
   final String iconName;
   final String title;
-  final VoidCallback onTapFunction;
-  final double fontSize;
+  final String active;
+  final Function onTapFunction;
 
   BottomAppBarButton(
       {@required this.iconName,
       @required this.title,
-      @required this.onTapFunction,
-      @required this.fontSize});
+      @required this.active,
+      @required this.onTapFunction});
 
-  @override
-  _BottomAppBarButtonState createState() => _BottomAppBarButtonState();
-}
-
-class _BottomAppBarButtonState extends State<BottomAppBarButton> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: this.widget.onTapFunction,
+      onTap: onTapFunction,
       child: Container(
         width: 70,
         height: 55,
@@ -89,13 +69,12 @@ class _BottomAppBarButtonState extends State<BottomAppBarButton> {
           children: <Widget>[
             Expanded(
               child: Image.asset(
-                "assets/icons/${this.widget.iconName}",
+                "assets/icons/$iconName",
               ),
             ),
-            Text(
-              this.widget.title,
+            Text(title,
               style: GoogleFonts.lobster(
-                fontSize: this.widget.fontSize,
+                fontSize: active == title ? 19 : 16,
               ),
             )
           ],

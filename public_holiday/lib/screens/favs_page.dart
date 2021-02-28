@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:public_holiday/models/countries.dart';
-import 'package:public_holiday/screens/countries_page/country_list_tile.dart';
+import 'package:public_holiday/components/country_list_tile.dart';
 
 class FavsPage extends StatelessWidget {
   @override

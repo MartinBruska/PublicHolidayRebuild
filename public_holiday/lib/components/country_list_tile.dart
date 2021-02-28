@@ -3,12 +3,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:public_holiday/models/countries.dart';
 import 'package:public_holiday/models/country.dart';
-import 'package:public_holiday/models/recentCountries.dart';
+import 'package:public_holiday/models/recent_countries.dart';
+import 'package:public_holiday/screens/country_details.dart';
 
 class CountryListTile extends StatelessWidget {
   final Country _country;
 
-  CountryListTile(this._country);
+  CountryListTile(this._country): assert(_country != null);
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +47,19 @@ class CountryListTile extends StatelessWidget {
                     color: Colors.red,
                   ),
                   onPressed: () => {
-                        context.read<Countries>()
+                        context
+                            .read<Countries>()
                             .toggleFavouriteStatus(_country)
                       }),
             ),
-            onTap: () => context.read<RecentCountries>().addToRecentCountries(_country),
+            onTap: () => {
+              context.read<RecentCountries>().addToRecentCountries(_country),
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CountryDetails( _country)),
+              )
+            },
           ),
         ),
       ),

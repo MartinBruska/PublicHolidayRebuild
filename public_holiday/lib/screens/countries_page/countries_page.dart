@@ -5,7 +5,7 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import 'package:public_holiday/models/countries.dart';
 import 'package:public_holiday/screens/countries_page/alphabet_scroll_view.dart';
-import 'package:public_holiday/screens/countries_page/country_list_tile.dart';
+import 'package:public_holiday/components/country_list_tile.dart';
 
 class CountriesPage extends StatefulWidget {
   @override
