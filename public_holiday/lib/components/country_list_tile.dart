@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:public_holiday/models/countries.dart';
 import 'package:public_holiday/models/country.dart';
+import 'package:public_holiday/models/home_page.dart';
 import 'package:public_holiday/models/recent_countries.dart';
 import 'package:public_holiday/screens/country_details.dart';
 
@@ -54,11 +55,7 @@ class CountryListTile extends StatelessWidget {
             ),
             onTap: () => {
               context.read<RecentCountries>().addToRecentCountries(_country),
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => CountryDetails( _country)),
-              )
+              context.read<HomePageModel>().updateBodyBuild(() => CountryDetails(_country), _country.name, "countryDetail")
             },
           ),
         ),

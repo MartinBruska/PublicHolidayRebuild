@@ -21,12 +21,14 @@ class _HomePageState extends State<HomePage> {
   static const String SEARCH_TITLE = "Search";
   static const String APP_TITLE = "Public Holiday.";
   static const String APP_FAVS_TITLE = "Favourites";
+  static const String SPLIT_TITLE = "Split";
 
   @override
   Widget build(BuildContext context) {
 
     String _appBarTitle = context.watch<HomePageModel>().getAppBarTitle;
     String _active = context.watch<HomePageModel>().getActiveTitle;
+    bool _isCountryDetail = _active == "countryDetail";
 
     return MultiProvider(
       providers: [
@@ -66,8 +68,8 @@ class _HomePageState extends State<HomePage> {
                     .updateBodyBuild(() => RecentPage(), RECENT_TITLE, RECENT_TITLE)),
             BottomAppBarButton(
                 active: _active,
-                iconName: "countries_search_icon.png",
-                title: SEARCH_TITLE,
+                iconName: _isCountryDetail ? "list.png" : "countries_search_icon.png",
+                title: _isCountryDetail ? SPLIT_TITLE : SEARCH_TITLE,
                 onTapFunction: () {}),
           ],
         ),
