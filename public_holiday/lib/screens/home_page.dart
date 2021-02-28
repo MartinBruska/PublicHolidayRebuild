@@ -9,26 +9,21 @@ import 'package:public_holiday/screens/countries_page/countries_page.dart';
 import 'package:public_holiday/screens/favs_page.dart';
 import 'package:public_holiday/screens/recent_page.dart';
 
+import '../strings.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  static const String COUNTRIES_TITLE = "Countries";
-  static const String FAVS_TITLE = "Favs";
-  static const String RECENT_TITLE = "Recent";
-  static const String SEARCH_TITLE = "Search";
-  static const String APP_TITLE = "Public Holiday.";
-  static const String APP_FAVS_TITLE = "Favourites";
-  static const String SPLIT_TITLE = "Split";
 
   @override
   Widget build(BuildContext context) {
 
     String _appBarTitle = context.watch<HomePageModel>().getAppBarTitle;
-    String _active = context.watch<HomePageModel>().getActiveTitle;
-    bool _isCountryDetail = _active == "countryDetail";
+    String _active = context.watch<HomePageModel>().getActiveBtnTitle;
+    bool _isCountryDetail = _active == Strings.COUNTRY_BTM_BAR_TITLE;
 
     return MultiProvider(
       providers: [
@@ -46,30 +41,30 @@ class _HomePageState extends State<HomePage> {
           [
             BottomAppBarButton(
                 iconName: "countries_icon.png",
-                title: COUNTRIES_TITLE,
+                title: Strings.COUNTRIES_BTM_BAR_TITLE,
                 active: _active,
                 onTapFunction: () => context
                     .read<HomePageModel>()
-                    .updateBodyBuild(() => CountriesPage(), APP_TITLE, COUNTRIES_TITLE)),
+                    .updateBodyBuild(() => CountriesPage(), Strings.APP_BAR_TITLE, Strings.COUNTRIES_BTM_BAR_TITLE)),
             // updateScreen(CountriesPage(), APP_TITLE, COUNTRIES_TITLE)),
             BottomAppBarButton(
                 iconName: "favs_icon.png",
-                title: FAVS_TITLE,
+                title: Strings.FAVS_BTM_BAR_TITLE,
                 active: _active,
                 onTapFunction: () => context
                     .read<HomePageModel>()
-                    .updateBodyBuild(() => FavsPage(), APP_FAVS_TITLE, FAVS_TITLE)),
+                    .updateBodyBuild(() => FavsPage(), Strings.FAVS_APP_BAR_TITLE, Strings.FAVS_BTM_BAR_TITLE)),
             BottomAppBarButton(
                 iconName: "recent_icon.png",
                 active: _active,
-                title: RECENT_TITLE,
+                title: Strings.RECENT_BTM_BAR_TITLE,
                 onTapFunction: () => context
                     .read<HomePageModel>()
-                    .updateBodyBuild(() => RecentPage(), RECENT_TITLE, RECENT_TITLE)),
+                    .updateBodyBuild(() => RecentPage(), Strings.RECENT_APP_BAR_TITLE, Strings.RECENT_BTM_BAR_TITLE)),
             BottomAppBarButton(
                 active: _active,
                 iconName: _isCountryDetail ? "list.png" : "countries_search_icon.png",
-                title: _isCountryDetail ? SPLIT_TITLE : SEARCH_TITLE,
+                title: _isCountryDetail ? Strings.SPLIT_BTM_BAR_TITLE : Strings.SEARCH_BTM_BAR_TITLE,
                 onTapFunction: () {}),
           ],
         ),

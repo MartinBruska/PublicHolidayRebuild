@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:public_holiday/models/countries.dart';
 import 'package:public_holiday/components/country_list_tile.dart';
 
+import '../strings.dart';
+
 class FavsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,7 @@ class FavsPage extends StatelessWidget {
             itemBuilder: (_, index) => CountryListTile(_favouriteList[index]),
           )
         : Center(
-            child: Text("No favourite country added"),
+            child: Text(Strings.NO_FAV_COUNTRY_ADDED),
           );
   }
 }

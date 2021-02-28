@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:public_holiday/models/recent_countries.dart';
 
 import '../components/country_list_tile.dart';
+import '../strings.dart';
 
 class RecentPage extends StatelessWidget {
   @override
@@ -16,7 +17,7 @@ class RecentPage extends StatelessWidget {
             itemBuilder: (_, index) => CountryListTile(_recentCountries[index]),
           )
         : Center(
-            child: Text("No recent country added yet"),
+            child: Text(Strings.NO_RECENT_COUNTRY_ADDED),
           );
   }
 }

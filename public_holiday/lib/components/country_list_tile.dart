@@ -7,6 +7,8 @@ import 'package:public_holiday/models/home_page.dart';
 import 'package:public_holiday/models/recent_countries.dart';
 import 'package:public_holiday/screens/country_details.dart';
 
+import '../strings.dart';
+
 class CountryListTile extends StatelessWidget {
   final Country _country;
 
@@ -55,7 +57,7 @@ class CountryListTile extends StatelessWidget {
             ),
             onTap: () => {
               context.read<RecentCountries>().addToRecentCountries(_country),
-              context.read<HomePageModel>().updateBodyBuild(() => CountryDetails(_country), _country.name, "countryDetail")
+              context.read<HomePageModel>().updateBodyBuild(() => CountryDetails(_country), _country.name, Strings.COUNTRY_BTM_BAR_TITLE)
             },
           ),
         ),
